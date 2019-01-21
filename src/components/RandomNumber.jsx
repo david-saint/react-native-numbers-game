@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import React, { Component } from 'react';
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 
@@ -18,12 +16,12 @@ const styles = StyleSheet.create({
     marginVertical: 25,
     fontSize: 35,
     textAlign: 'center',
-    borderRadius: 0
+    borderRadius: 0,
   },
 
   selected: {
     opacity: 0.5,
-  }
+  },
 });
 
 class RandomNumber extends Component {
@@ -35,14 +33,19 @@ class RandomNumber extends Component {
   };
 
   handlePress = () => {
-    if (!this.props.isDisabled)
-      this.props.onPress(this.props.id);
+    const { id, isDisabled, onPress } = this.props;
+
+    if (!isDisabled) {
+      onPress(id);
+    }
   };
 
   render() {
+    const { isDisabled, number } = this.props;
+
     return (
       <TouchableOpacity onPress={this.handlePress}>
-        <Text style={[styles.random, this.props.isDisabled && styles.selected]}>{this.props.number}</Text>
+        <Text style={[styles.random, isDisabled && styles.selected]}>{number}</Text>
       </TouchableOpacity>
     );
   }
